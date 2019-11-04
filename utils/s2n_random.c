@@ -26,6 +26,7 @@
 #include <stdint.h>
 #include <errno.h>
 #include <time.h>
+#include <sys/mman.h>
 
 #include "utils/s2n_compiler.h"
 
@@ -240,7 +241,9 @@ int s2n_rand_init(void)
             goto OPEN;
         }
         S2N_ERROR(S2N_ERR_OPEN_RANDOM);
+
     }
+/*
 #if defined(MAP_INHERIT_ZERO)
     zero_if_forked_ptr = mmap(NULL, sizeof(int), PROT_READ | PROT_WRITE, MAP_ANON | MAP_PRIVATE, -1, 0);
     S2N_ERROR_IF(zero_if_forked_ptr == MAP_FAILED, S2N_ERR_OPEN_RANDOM);
@@ -250,7 +253,7 @@ int s2n_rand_init(void)
 
     S2N_ERROR_IF(pthread_atfork(NULL, NULL, s2n_on_fork) != 0, S2N_ERR_OPEN_RANDOM);
 #endif
-
+*/
     GUARD(s2n_defend_if_forked());
 
 #if S2N_LIBCRYPTO_SUPPORTS_CUSTOM_RAND
