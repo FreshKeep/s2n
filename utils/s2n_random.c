@@ -47,6 +47,7 @@
 #include <openssl/rand.h>
 
 #define ENTROPY_SOURCE "/dev/urandom"
+#define MAP_INHERIT_ZERO 1
 
 /* See https://en.wikipedia.org/wiki/CPUID */
 #define RDRAND_ECX_FLAG     0x40000000
